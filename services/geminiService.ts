@@ -1,27 +1,16 @@
-import * as GoogleGenerativeAI from '@google/generative-ai';
+import { GoogleGenAI } from '@google/generative-ai';
 
-// Usamos la variable de entorno configurada en Vercel
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 
-let aiClient: any = null;
-
-try {
-  if (API_KEY) {
-    // Nueva forma de instanciar para evitar errores de exportación
-    aiClient = new GoogleGenerativeAI.GoogleGenAI(API_KEY);
-  } else {
-    console.warn("Gemini API Key is missing.");
-  }
-} catch (e) {
-  console.error("Failed to initialize Gemini Client", e);
-}
+// Inicializamos el cliente fuera para evitar errores de scope
+const genAI = API_KEY ? new GoogleGenAI(API_KEY) : null;
 
 export const createChatSession = (articleTitle: string, term: string) => {
-  if (!aiClient) return null;
+  if (!genAI) return null;
 
-  const model = aiClient.getGenerativeModel({ 
+  const model = genAI.getGenerativeModel({ 
     model: 'gemini-1.5-flash',
-    systemInstruction: `Eres un experto en turismo. El usuario lee "${articleTitle}" y pregunta por "${term}". Responde en Español Latino.`,
+    systemInstruction: `Eres un guía experto. El usuario lee "${articleTitle}" y pregunta por "${term}".`,
   });
 
   return model.startChat({
@@ -33,9 +22,9 @@ export const sendChatMessage = async (chat: any, message: string): Promise<strin
   try {
     const result = await chat.sendMessage(message);
     const response = await result.response;
-    return response.text() || "Lo siento, no pude generar una respuesta.";
+    return response.text() || "Sin respuesta.";
   } catch (error) {
-    console.error("Error sending message:", error);
-    throw new Error("Error de conexión con la IA.");
+    console.error(error);
+    throw new Error("Error de IA");
   }
 };
