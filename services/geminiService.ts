@@ -2,7 +2,7 @@ import { GoogleGenAI, Chat } from '@google/genai';
 
 // NOTE: In a real production app, this key should be proxied through a backend.
 // For this demo, we assume it's available in the environment.
-const API_KEY = process.env.API_KEY || '';
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 let aiClient: GoogleGenAI | null = null;
 
