@@ -15,7 +15,8 @@ export const createChatSession = (articleTitle: string, term: string) => {
 export const sendChatMessage = async (chat: any, message: string): Promise<string> => {
   try {
     const result = await chat.sendMessage(message);
-    return result.response.text();
+    const response = await result.response;
+    return response.text();
   } catch (error) {
     console.error(error);
     return "Error de conexión con la IA.";
