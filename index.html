@@ -4,49 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Travel Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['Merriweather', 'serif'],
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              brand: {
-                900: '#1a1a1a', // Dark background
-                800: '#2d2d2d',
-                100: '#f3f4f6',
-              },
-              accent: {
-                400: '#fbbf24',
-                500: '#f59e0b', // The yellow/gold color
-                600: '#d97706',
-              },
-              action: {
-                500: '#0ea5e9', // The blue subscribe button
-                600: '#0284c7',
-              }
-            }
-          },
-        },
-      }
-    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@18.2.0",
-        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-        "react-router-dom": "https://esm.sh/react-router-dom@6.22.3",
-        "lucide-react": "https://esm.sh/lucide-react@0.344.0",
-        "@google/genai": "https://esm.sh/@google/genai@1.20.0"
-      }
-    }
-    </script>
+    
     <style>
-      /* Custom scrollbar for a cleaner look */
+      /* Scrollbar personalizado */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -62,6 +24,11 @@
       }
     </style>
   </head>
+  <body class="bg-white text-slate-900 antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
   <body class="bg-white text-slate-900 antialiased">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
